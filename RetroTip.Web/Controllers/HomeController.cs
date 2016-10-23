@@ -1,33 +1,64 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RetroTip.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Web;
+using System.Web.Mvc;
 
 namespace RetroTip.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+            ViewBag.Title = "Home Page";
 
             return View();
         }
 
-        public IActionResult Contact()
+        public ActionResult Main()
         {
-            ViewData["Message"] = "Your contact page.";
+            // Get the users predicted history from Synchrony
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                var request = new HttpRequestMessage()
+                {
+                    RequestUri = new Uri("https://syf2020.syfwebservices.com/syf/nextMostLikelyPurchase"),
+                    Method = HttpMethod.Post
+                };
+
+                request.Headers.Add("username", "giveitatry");
+                request.Headers.Add("password", "Sh0wT!me");
+                request.Headers.Add("Content-Type", "application/json");
+
+                var response = client.SendAsync(request).Result;
+
+                response.EnsureSuccessStatusCode();
+
+                LikelyPurchase likelyPurchases = JsonConvert.DeserializeObject<LikelyPurchase>(response.Content.ReadAsStringAsync().Result);
+
+                
+            }
+            catch
+            {
+
+            }
+
+            // Match with users show a few of the matches
 
             return View();
         }
 
-        public IActionResult Error()
+        public ActionResult TipTimeline()
+        {
+            return View();
+        }
+
+        public ActionResult CheckBalance()
         {
             return View();
         }

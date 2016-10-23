@@ -4,9 +4,9 @@
       "type": "Import",
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
-      "projectGuid": "7c8f5b60-42af-4919-804e-899e57e45a41",
-      "lastModifiedDate": 1477181215538,
-      "creationDate": 1477180525707
+      "projectGuid": "1f0ebda6-81ef-4f6b-9ea1-c4d5b541b86f",
+      "lastModifiedDate": 1477241001539,
+      "creationDate": 1477191093450
     },
     "gameAssetDirectory": "asset",
     "gameMetadata": {},
